@@ -27,8 +27,7 @@ RUN apk add --no-cache \
     freetype-dev \
     libjpeg-turbo-dev \
     sqlite-dev \
-    icu-dev \
-    redis
+    icu-dev
 
 # Install PHP extensions
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
@@ -42,6 +41,9 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     zip \
     opcache \
     intl
+
+# Install Redis extension via pecl
+RUN pecl install redis && docker-php-ext-enable redis
 
 # Install Composer from the official composer image
 COPY --from=composer:2.8 /usr/bin/composer /usr/bin/composer
