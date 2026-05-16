@@ -27,6 +27,7 @@ RUN apk add --no-cache \
     freetype-dev \
     libjpeg-turbo-dev \
     sqlite-dev \
+    icu-dev \
     redis
 
 # Install PHP extensions
