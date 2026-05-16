@@ -42,8 +42,11 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     opcache \
     intl
 
-# Install Redis extension via pecl
-RUN pecl install redis && docker-php-ext-enable redis
+# Install autoconf (needed for pecl install) then Redis extension
+RUN apk add --no-cache autoconf g++ make \
+    && pecl install redis \
+    && docker-php-ext-enable redis \
+    && apk del autoconf g++ make
 
 # Install Composer from the official composer image
 COPY --from=composer:2.8 /usr/bin/composer /usr/bin/composer
