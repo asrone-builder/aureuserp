@@ -1,5 +1,5 @@
 # Stage 1: Build frontend assets
-FROM --platform=linux/arm64 node:22-alpine AS frontend
+FROM node:22-alpine AS frontend
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
@@ -7,9 +7,9 @@ COPY . .
 RUN npm run build
 
 # Stage 2: PHP runtime
-FROM --platform=linux/arm64 php:8.3-fpm-alpine AS base
+FROM php:8.3-fpm-alpine AS base
 
-# Install system dependencies only (separate layer for clarity)
+# Install system dependencies
 RUN apk add --no-cache \
     bash \
     curl \

@@ -3,7 +3,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    platform: linux/arm64
     image: aureuserp:latest
     restart: unless-stopped
     ports:
@@ -60,7 +59,6 @@ services:
 
   db:
     image: mariadb:11
-    platform: linux/arm64
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: aureuserp
@@ -78,7 +76,6 @@ services:
 
   redis:
     image: redis:7-alpine
-    platform: linux/arm64
     restart: unless-stopped
     volumes:
       - aureuserp-redis:/data
